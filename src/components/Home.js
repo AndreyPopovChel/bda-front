@@ -7,8 +7,7 @@ import { withRouter } from 'react-router-dom';
 @observer
 export default class Home extends React.Component {
 
-  render() {
-    
+  render() {    
     return (
       <div className="home-page">
         <BeeFamilyGridLayout />

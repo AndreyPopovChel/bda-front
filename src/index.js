@@ -8,7 +8,12 @@ import { Provider } from 'mobx-react';
 
 import App from './components/App';
 
-const stores = {};
+import locationStore from './stores/locationStore';
+
+
+const stores = {
+  locationStore
+};
 
 promiseFinally.shim();
 useStrict(true);
