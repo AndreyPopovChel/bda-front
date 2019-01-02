@@ -1,6 +1,6 @@
 import React from 'react';
 import BeeFamilyGridLayout from './BeeFamilyGridLayout';
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
 
 @withRouter

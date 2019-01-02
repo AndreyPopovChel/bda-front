@@ -18,45 +18,45 @@ class BeeFamilyGridLayout extends React.Component {
 
     const { lastLocations } = this.props.locationStore;
 
-    if ( this.props.locationStore.isLoadingLastLocations && lastLocations.length === 0) {
+    if ( this.props.locationStore.isLoadingLastLocations) {
       return (
         <LoadingSpinner />
       );
     }
 
-    var layout = [
-      {i: 'a', x: 0, y: 0, w: 2, h: 12},
-      {i: 'b', x: 2, y: 0, w: 2, h: 12},
-      {i: 'c', x: 4, y: 0, w: 2, h: 12}
-    ];
+    var layout = [];
 
     var xVal = 0;
-
-    //alert(lastLocations.length);
+    var yVal = 0;
+    var locCounter = 0;
 
     lastLocations.map(location => 
       {
         layout.push(
-          {i: location.sn, x: xVal, y: 0, w: 2, h: 12}
+          {i: location.sn, x: xVal, y: yVal, w: 2, h: 12, loc: location}
         );
         xVal += 2;
+
+        locCounter++;
+        if(locCounter % 6 == 0)
+        {
+          xVal = 0;
+          yVal ++;
+        }
+
     });
-
-    var tempFamily = {
-
-    }
 
     return (
       <GridLayout className="layout" layout={layout} cols={12} rowHeight={30} width={1200}>
-        <div key="a">
-            <BeeFamilyView family = {tempFamily}/>
-        </div>
-        <div key="b">
-            <BeeFamilyView family = {tempFamily}/>
-        </div>
-        <div key="c">
-            <BeeFamilyView family = {tempFamily}/>
-        </div>
+        {
+          layout.map(lt => {
+            return (
+              <div key={lt.i}>
+                  <BeeFamilyView family = {lt.loc}/>
+              </div>
+            );
+          })
+        }       
       </GridLayout>
     )
   }

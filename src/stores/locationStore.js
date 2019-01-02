@@ -9,7 +9,7 @@ class LocationStore {
   @action loadLastLocations() {
     this.isLoadingLastLocations = true;
     return agent.Locations.getLast()
-      .then(action(({ locs }) => { this.lastLocations = locs; }))
+      .then(  action((lastLocations) => {this.lastLocations.replace(lastLocations); }))
       .finally(action(() => { this.isLoadingLastLocations = false; }))
   }
 }
