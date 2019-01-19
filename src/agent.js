@@ -3,8 +3,8 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-//const API_ROOT = 'https://gsmtrek.herokuapp.com/api';
-const API_ROOT = 'http://localhost:3000/api';
+const API_ROOT = 'https://gsmtrek.herokuapp.com/api';
+//const API_ROOT = 'http://localhost:3000/api';
 
 const handleErrors = err => {
   if (err && err.response && err.response.status === 401) {
