@@ -8,10 +8,10 @@ import { withRouter } from 'react-router-dom';
 export default class Home extends React.Component {
 
   render() {    
-    return (
-      <div className="home-page back-view">
-        <BeeFamilyGridLayout />
-      </div>
-    );
-  }
+      return (
+        <div className="home-page back-view">
+          <BeeFamilyGridLayout />
+        </div>
+      );
+    }  
 }

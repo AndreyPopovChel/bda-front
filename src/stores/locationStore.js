@@ -8,9 +8,9 @@ class LocationStore {
   @observable otherLocations = [];
   @observable isLoadingLastLocations = false;
   
-  @action loadLastLocations() {
+  @action loadLastLocations(username) {
     this.isLoadingLastLocations = true;
-    return agent.Locations.getLast()
+    return agent.Locations.getLast(username)
       .then(  action((lastLocations) => 
       {
         var _additionalDevices = [];

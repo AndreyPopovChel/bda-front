@@ -1,5 +1,7 @@
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
+import commonStore from './stores/commonStore';
+import authStore from './stores/authStore';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
@@ -8,19 +10,19 @@ const API_ROOT = 'https://gsmtrek.herokuapp.com/api';
 
 const handleErrors = err => {
   if (err && err.response && err.response.status === 401) {
-    //authStore.logout();
+    authStore.logout();
   }
   return err;
 };
 
 const responseBody = res => res.body;
 
-
+const encode = encodeURIComponent;
 
 const tokenPlugin = req => {
-  //if (commonStore.token) {
-  //  req.set('authorization', `Token ${commonStore.token}`);
-  //}
+  if (commonStore.token) {
+    req.set('authorization', `Token ${commonStore.token}`);
+  }
 };
 
 const requests = {
@@ -50,11 +52,33 @@ const requests = {
       .then(responseBody),
 };
 
+const Auth = {
+  current: () =>
+    requests.get('/user'),
+  login: (email, password) =>
+    requests.post('/users/login', { user: { email, password } }),
+  register: (username, email, password) =>
+    requests.post('/users', { user: { username, email, password } }),
+  save: user =>
+    requests.put('/user', { user })
+};
+
+const DeviceSettings = {
+  getSerialNumbers: (username) =>
+    requests.get(`/serialnumbers?username=${encode(username)}`),
+  get: (sn) =>
+    requests.get(`/customize?sn=${encode(sn)}`),
+  save: settings =>
+    requests.post('/customize', settings )
+};
+
 const Locations = {
-  getLast: () => requests.get('/lastLocations')
+  getLast: (username) => requests.get(`/lastLocations?username=${encode(username)}`)
 };
 
 
 export default {
-  Locations
+  Auth,
+  Locations,
+  DeviceSettings
 };

@@ -6,12 +6,12 @@ import { withRouter } from 'react-router-dom'
 import { inject, observer } from 'mobx-react';
 import LoadingSpinner from './LoadingSpinner';
 
-@inject('locationStore')
+@inject('locationStore', 'userStore')
 @withRouter
 @observer
 class BeeFamilyGridLayout extends React.Component {
   componentDidMount() {
-    this.props.locationStore.loadLastLocations();
+    this.props.locationStore.loadLastLocations(this.props.userStore.currentUser.username);
   }
 
   render() {

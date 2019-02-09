@@ -9,10 +9,18 @@ import { Provider } from 'mobx-react';
 import App from './components/App';
 
 import locationStore from './stores/locationStore';
+import authStore from './stores/authStore';
+import commonStore from './stores/commonStore';
+import userStore from './stores/userStore';
+import deviceSettingsStore from './stores/deviceSettingsStore';
 
 
 const stores = {
-  locationStore
+  locationStore,
+  authStore,
+  commonStore,
+  userStore,
+  deviceSettingsStore
 };
 
 promiseFinally.shim();
