@@ -1,5 +1,6 @@
 import { observable, action } from 'mobx';
 import agent from '../agent';
+import moment from 'moment';
 
 class LocationStore {
 
@@ -18,14 +19,14 @@ class LocationStore {
         var _otherLocations = [];
       
         lastLocations.forEach(function (loc) {
-          /*if (moment(doc.timestamp, 'DD.MM.YYYY H:mm:ss').add(2, 'days').isBefore())
+          if (moment(loc.timestamp, 'DD.MM.YYYY H:mm:ss').add(2, 'days').isBefore())
           {
-            doc.opacity = 0.5;
+            loc.opacity = 0.5;
           }
           else
           {
-            doc.opacity = 1;
-          }*/
+            loc.opacity = 1;
+          }
       
           if( loc.hideDevice === true)
           {

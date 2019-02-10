@@ -46,3 +46,11 @@
     color: gray;
     margin-left: 10px;
 }
+
+.logo-image {
+    padding: 6px;
+}
+
+.main-header-panel {
+    display: inline-block;
+}

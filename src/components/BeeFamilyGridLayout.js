@@ -15,8 +15,11 @@ class BeeFamilyGridLayout extends React.Component {
     if('admin' === username)
     {
       username = "";
-    }
+    }    
+
     this.props.locationStore.loadLastLocations(username);
+
+    setInterval(() => this.props.locationStore.loadLastLocations(username), 30000);
   }
 
   render() {
@@ -36,7 +39,7 @@ class BeeFamilyGridLayout extends React.Component {
     additionalDevices.map(location => 
       {
         layout1.push(
-          {i: location.sn, x: xVal, y: yVal, w: 2, h: 12, isResizable: false, isDraggable: false, loc: location}
+          {i: location.sn, x: xVal, y: yVal, w: 2, h: 12.5, isResizable: false, isDraggable: false, loc: location}
         );
         xVal += 2;
 
@@ -55,7 +58,7 @@ class BeeFamilyGridLayout extends React.Component {
     mainLocations.map(location => 
       {
         layout2.push(
-          {i: location.sn, x: xVal, y: yVal, w: 2, h: 12, isResizable: false, isDraggable: false, loc: location}
+          {i: location.sn, x: xVal, y: yVal, w: 2, h: 12.5, isResizable: false, isDraggable: false, loc: location}
         );
         xVal += 2;
 
@@ -74,7 +77,7 @@ class BeeFamilyGridLayout extends React.Component {
     otherLocations.map(location => 
       {
         layout3.push(
-          {i: location.sn, x: xVal, y: yVal, w: 2, h: 12, isResizable: false, isDraggable: false, loc: location}
+          {i: location.sn, x: xVal, y: yVal, w: 2, h: 12.5, isResizable: false, isDraggable: false, loc: location}
         );
         xVal += 2;
 

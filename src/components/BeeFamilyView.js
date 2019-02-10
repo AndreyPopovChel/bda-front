@@ -9,7 +9,7 @@ export default class BeeFamilyView extends React.Component {
     const { family } = this.props;
 
     return (
-      <div>
+      <div style={{opacity: family.opacity}}>
         <div className="color-mark" style={{background: family.color}}></div>
         <div className="family-header">{family.label} #{family.sn}</div>
         <div className="common-label">Обновлено: {family.timestamp}</div>
@@ -24,6 +24,7 @@ export default class BeeFamilyView extends React.Component {
         <div className="common-label"> ЛОВ = {family.TVOC} ppb</div>
         <div className="header-label">Атмосферное давление</div>
         <div className="common-label"> Давл. = {family.pressurebarom} Pa</div>
+        <div className="common-label"> Крышка = ЗАКР</div>
         <button className="button-view">Послушать звук</button>
         <button className="button-view">Анализ звука пчел</button>        
       </div>
