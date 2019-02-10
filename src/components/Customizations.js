@@ -2,13 +2,14 @@ import ListErrors from './ListErrors';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
+import LoadingSpinner from './LoadingSpinner';
 
 @inject('userStore')
 @inject('deviceSettingsStore')
 @observer
 class CustomizationsForm extends React.Component {
   constructor() {
-    super();
+    super();    
 
     this.state = {
       sn: '',
@@ -29,6 +30,10 @@ class CustomizationsForm extends React.Component {
       this.setState(newState);
     };
 
+    this.onChangeSn = event => {
+      this.setState(this.props.deviceSettingsStore.allSettings.find(x => x.sn === event.target.value));
+    };
+
     this.submitForm = ev => {
       ev.preventDefault();
 
@@ -38,23 +43,44 @@ class CustomizationsForm extends React.Component {
   }
 
   componentWillMount() {
-    // реализовать в обработчике изменения sn загрузку данных об устройстве
+    var username = this.props.userStore.currentUser.username;
+    if('admin' === username)
+    {
+      username = "";
+    }
+
+    this.props.deviceSettingsStore.getSerialNumbers(username);
   }
 
-  render() {
+  render() {    
+
+    if ( this.props.deviceSettingsStore.loadingSettings) {
+      return (
+        <LoadingSpinner />
+      );
+    }    
+
+    const { allSettings } = this.props.deviceSettingsStore;
+
     return (
       <form onSubmit={this.submitForm}>
-        <fieldset>
+        <fieldset>       
 
           <fieldset className="form-group">
             <label>Заводской номер</label>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Заводской номер"
-              value={this.state.sn}
-              onChange={this.updateState('sn')}
-            />
+            <select 
+              className="form-control" 
+              value={this.state.sn} 
+              onChange={this.onChangeSn}>
+              <option value="">
+                  Укажите серийный номер...
+              </option>
+                 {allSettings.map(cust => (
+                  <option key={cust.sn} value={cust.sn}>
+                      {cust.sn}
+                  </option>
+              ))}
+            </select>            
           </fieldset>
 
           <fieldset className="form-group">
@@ -151,9 +177,8 @@ class CustomizationsForm extends React.Component {
             />
           </fieldset>
 
-
-
-          <fieldset className="form-group">
+          
+          {/* <fieldset className="form-group">
             <label>Пользователь</label>
             <input
               className="form-control"
@@ -161,7 +186,7 @@ class CustomizationsForm extends React.Component {
               value={this.state.ownerUserName}
               onChange={this.updateState('ownerUserName')}
             />
-          </fieldset>
+          </fieldset> */}
 
           <button
             className="btn btn-lg btn-primary pull-xs-right"

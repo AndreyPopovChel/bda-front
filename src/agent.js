@@ -64,8 +64,8 @@ const Auth = {
 };
 
 const DeviceSettings = {
-  getSerialNumbers: (username) =>
-    requests.get(`/serialnumbers?username=${encode(username)}`),
+  getSerialNumbers: (username) =>  
+    requests.get(username === "" ? `/serialnumbers` :`/serialnumbers?username=${encode(username)}`),
   get: (sn) =>
     requests.get(`/customize?sn=${encode(sn)}`),
   save: settings =>

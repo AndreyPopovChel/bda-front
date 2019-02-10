@@ -7,6 +7,8 @@ class DeviceSettingsStore {
   @observable updatingSettings;
   @observable updatingSettingsErrors;
 
+  @observable allSettings = [];
+
   @action getSettings(sn) {
     this.loadingSettings = true;
     return agent.DeviceSettings.get(sn)
@@ -17,7 +19,14 @@ class DeviceSettingsStore {
   @action getSerialNumbers(username) {
     this.loadingSettings = true;
     return agent.DeviceSettings.getSerialNumbers(username)
-      .then(action(({ serialNumbers }) => { return serialNumbers; }))
+      .then(action(( serialNumbers ) => 
+      {
+        var settings = [];      
+        serialNumbers.forEach(function (sn) {settings.push(sn)}); 
+        settings.sort((a,b) => (parseInt(a.sn) > parseInt(b.sn)) ? 1 : ((parseInt(b.sn) > parseInt(a.sn)) ? -1 : 0)); 
+        this.allSettings.replace(settings); 
+      
+      }))
       .finally(action(() => { this.loadingSettings = false; }))
   }
 

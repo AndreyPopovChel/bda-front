@@ -11,7 +11,12 @@ import LoadingSpinner from './LoadingSpinner';
 @observer
 class BeeFamilyGridLayout extends React.Component {
   componentDidMount() {
-    this.props.locationStore.loadLastLocations(this.props.userStore.currentUser.username);
+    var username = this.props.userStore.currentUser.username;
+    if('admin' === username)
+    {
+      username = "";
+    }
+    this.props.locationStore.loadLastLocations(username);
   }
 
   render() {

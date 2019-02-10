@@ -75,7 +75,7 @@ class SettingsForm extends React.Component {
             <input
               className="form-control form-control-lg"
               type="password"
-              placeholder="New Password"
+              placeholder="Новый пароль"
               value={this.state.password}
               onChange={this.updateState('password')}
             />
@@ -126,7 +126,7 @@ class Settings extends React.Component {
                 className="btn btn-outline-danger"
                 onClick={this.handleClickLogout}
               >
-                Нажмите для выхода из учетной записи.
+                Нажмите для выхода из учетной записи
               </button>
 
             </div>
