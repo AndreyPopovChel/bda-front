@@ -19,7 +19,7 @@ class BeeFamilyGridLayout extends React.Component {
 
     this.props.locationStore.loadLastLocations(username);
 
-    setInterval(() => this.props.locationStore.loadLastLocations(username), 30000);
+    //setInterval(() => this.props.locationStore.loadLastLocations(username), 30000);
   }
 
   render() {

@@ -98,11 +98,7 @@ class SettingsForm extends React.Component {
 @inject('userStore', 'authStore')
 @withRouter
 @observer
-class Settings extends React.Component {
-
-  handleClickLogout = () =>
-    this.props.authStore.logout()
-      .then(() => this.props.history.replace('/'));
+class Settings extends React.Component {  
 
   render() {
 
@@ -120,14 +116,7 @@ class Settings extends React.Component {
                 currentUser={this.props.userStore.currentUser}
                 onSubmitForm={user => this.props.userStore.updateUser(user)} />
 
-              <hr />
-
-              <button
-                className="btn btn-outline-danger"
-                onClick={this.handleClickLogout}
-              >
-                Нажмите для выхода из учетной записи
-              </button>
+              <hr />              
 
             </div>
           </div>

@@ -29,6 +29,7 @@ const LoggedOutView = props => {
 };
 
 const LoggedInView = props => {
+      
   if (props.currentUser) {
     return (
       <div>
@@ -53,10 +54,21 @@ const LoggedInView = props => {
           </li>
 
           <li className="nav-item nav-link">
-            Добро пожаловать, {props.currentUser.username}          
+            Добро пожаловать, {props.currentUser.username}!          
+          </li>
+
+          <li className="nav-item">
+            <button
+                className="btn btn-outline"
+                onClick={() =>
+                  props.authStore.logout()}>
+                Выйти
+            </button>          
           </li>
 
         </ul>
+
+        
       </div>
     );
   }
@@ -64,9 +76,10 @@ const LoggedInView = props => {
   return null;
 };
 
-@inject('userStore', 'commonStore')
+@inject('userStore', 'commonStore', 'authStore')
 @observer
-class Header extends React.Component {
+class Header extends React.Component {  
+
   render() {
     return (
       <div>
@@ -82,7 +95,7 @@ class Header extends React.Component {
 
             <LoggedOutView currentUser={this.props.userStore.currentUser} />
 
-            <LoggedInView currentUser={this.props.userStore.currentUser} />
+            <LoggedInView history={this.props.history} authStore={this.props.authStore} currentUser={this.props.userStore.currentUser} />
           </div>
          </nav>
 

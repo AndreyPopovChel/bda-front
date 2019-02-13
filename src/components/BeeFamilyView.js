@@ -8,8 +8,13 @@ export default class BeeFamilyView extends React.Component {
   render() {
     const { family } = this.props;
 
+    const batteryStyle = {
+      height: family.batt + '%'
+    };
+    
     return (
       <div style={{opacity: family.opacity}}>
+        <div className="battery"><div className="battery-level" style={batteryStyle}></div></div>
         <div className="color-mark" style={{background: family.color}}></div>
         <div className="family-header">{family.label} #{family.sn}</div>
         <div className="common-label">Обновлено: {family.timestamp}</div>
