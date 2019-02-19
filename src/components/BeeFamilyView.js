@@ -11,6 +11,12 @@ export default class BeeFamilyView extends React.Component {
     const batteryStyle = {
       height: family.batt + '%'
     };
+
+    var temperature = family['temperature 1'];
+    if(parseFloat(family['temperature 1']) > 10)
+    {
+      temperature = family['temperature 2']
+    }
     
     return (
       <div style={{opacity: family.opacity}}>
@@ -21,7 +27,7 @@ export default class BeeFamilyView extends React.Component {
         <div className="common-label">GPS: {family.gsmlat}N {family.gsmlon}E</div>
 
         <div className="header-label">Температура</div> 
-        <div className="common-label"> T2 = {family['temperature 2']} &deg;C</div>
+        <div className="common-label"> T2 = {temperature} &deg;C</div>
         <div className="header-label"> Влажность</div>
         <div className="common-label"> H1 = {family.humidity} %</div>
         <div className="header-label"> Качество воздуха</div>
