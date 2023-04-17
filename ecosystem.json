@@ -1,0 +1,22 @@
+{
+  /**
+   * Application configuration section
+   * http://pm2.keymetrics.io/docs/usage/application-declaration/
+   */
+  apps : [
+],
+
+  /**
+   * Deployment section
+   * http://pm2.keymetrics.io/docs/usage/deployment/
+   */
+  deploy : {
+    release : {
+      "user" : "root",
+      "host" : "mysite.com",
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:AndreyPopovChel/bda-front.git",
+      "path" : "/var/www/html/bda-front"
+    }
+  }
+}
